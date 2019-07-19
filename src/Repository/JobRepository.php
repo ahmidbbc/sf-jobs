@@ -19,6 +19,42 @@ class JobRepository extends ServiceEntityRepository
         parent::__construct($registry, Job::class);
     }
 
+    public function getJobsFromSearch($search)
+    {
+        $qb = $this ->createQueryBuilder("job")
+                    ->select("job")
+                    ->join("job.skills", "s")
+                    ->groupBy("job.id")
+        ;
+
+        if(! empty($search["jobTitle"])){
+            $qb ->andWhere("job.title LIKE '%title%'")
+                ->setParameter('title', $search["jobTitle"])
+            ;
+        }
+        if (! empty($search["skills"])){
+            $skillArray = explode(",", $search['skills']);
+            $skillArray = array_map(
+                function ($item){
+                    return trim($item);
+                },
+                $skillArray
+            );
+            $skillArray = array_unique($skillArray);
+
+
+            for ($i=0; $i<count($skillArray); $i++){
+                if(!empty($skillArray)){
+                    $qb ->andWhere("s.skillName=:skill_$i")
+                        ->setParameter("skill_$i", $skillArray[$i])
+                    ;
+                }
+            }
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Job[] Returns an array of Job objects
     //  */

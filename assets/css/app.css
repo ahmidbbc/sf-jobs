@@ -1,3 +1,8 @@
 body {
-    background-color: lightgray;
+    background-color: #76D7C4;
+}
+
+#content{
+    margin-top: 100px;
+    padding: 10px;
 }
