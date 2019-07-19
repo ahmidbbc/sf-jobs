@@ -8,9 +8,19 @@
         {% endblock %}
     </head>
     <body class="container-fluid">
-        {% block body %}{% endblock %}
-        <scrip src="{{ asset('build/runtime.js') }}"></scrip>
-        <script src="{{ asset('build/js/app.js') }}"></script>
-        {% block javascripts %}{% endblock %}
+
+        {% block navbar %}
+            {{ include('_fragments/navbar.html.twig') }}
+        {% endblock %}
+
+        {% block body %}
+        {% endblock %}
+
+
+        {% block javascripts %}
+            <scrip src="{{ asset('build/runtime.js') }}"></scrip>
+            <script src="{{ asset('build/js/app.js') }}"></script>
+        {% endblock %}
+
     </body>
 </html>
