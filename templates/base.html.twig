@@ -14,9 +14,12 @@
         {% endblock %}
 
         <div id="content">
-            {% for message in app.session.flashBag('error') %}
-                <p>{{ message }}</p>
-            {% endfor %}
+            <div class="bg-warning">
+                {% for message in app.session.flashBag.get('error') %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+
 
 
             {% block body %}

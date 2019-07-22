@@ -83,7 +83,7 @@ class JobController extends AbstractController
 
         return $this->render('job/edit.html.twig', [
             'job' => $job,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 

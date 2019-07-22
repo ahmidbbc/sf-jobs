@@ -3,9 +3,46 @@
 {% block title %}New Applicant{% endblock %}
 
 {% block body %}
-    <h1>Create new Applicant</h1>
 
-    {{ include('applicant/_form.html.twig') }}
 
-    <a href="{{ path('applicant_index') }}">back to list</a>
+    <div class="row justify-content-center">
+        <div class="col-md-8">.
+            <h1>Create new Applicant</h1>
+            {{ include('applicant/_form.html.twig') }}
+
+            <a href="{{ path('applicant_index') }}">back to list</a>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function () {
+                $skillsCollectionHolder = $('#applicant_skills');
+                $skillTemplate = $skillsCollectionHolder.data("prototype");
+
+
+                $experienceCollectionHolder = $('#applicant_experiences');
+                $ExpTemplate = $experienceCollectionHolder.data("prototype");
+
+                var index = $skillsCollectionHolder.children().length;
+
+                $('#addSkill').click(function () {
+
+                    let newSkill = $($skillTemplate.replace(/__name__/g, index++));
+                    let deleteButton = $('<button type="button" class="delete btn btn-danger">Supprimer</button><hr>');
+                    newSkill.append(deleteButton);
+                    $skillsCollectionHolder.append(newSkill);
+            });
+
+            $skillsCollectionHolder.delegate('.delete', 'click', function () {
+                $(this).parent().remove();
+            })
+        });
+    </script>
 {% endblock %}

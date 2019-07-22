@@ -1,4 +1,16 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    {{ form_row(form.name) }}
+
+    {{ form_row(form.resume) }}
+
+    <button type="button" id="addSkill" class="btn btn-info">
+        Ajouter une compétence
+    </button>
+
+    {{ form_row(form.skills) }}
+
+    {{ form_rest(form) }}
+
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
