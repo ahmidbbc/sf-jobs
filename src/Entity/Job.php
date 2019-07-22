@@ -26,7 +26,7 @@ class Job
     private $skills;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string")
      */
     private $title;
 
@@ -34,6 +34,31 @@ class Job
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     * @ORM\Version()
+     */
+    private $version;
+
+    /**
+     * @return int
+     */
+    public function getVersion(): int
+    {
+        return $this->version;
+    }
+
+    /**
+     * @param int $version
+     */
+    public function setVersion(int $version): void
+    {
+        $this->version = $version;
+    }
+
+
 
     public function __construct()
     {
@@ -93,5 +118,16 @@ class Job
         }
 
         return $this;
+    }
+
+    public function getSkillsList()
+    {
+        $list = "";
+
+        foreach ($this->skills->toArray() as $skill){
+            $list .= $skill->getSkillName()." ";
+        }
+
+        return $list;
     }
 }

@@ -35,10 +35,10 @@ App\Entity\Skill:
 App\Entity\Applicant:
   applicant{1..20}:
     name: <name()>
-    skills: <randomElements([@skill_*, @skill_*, @skill_*, @skill_*, @skill_*])>
+    skills: <randomElements([@skill_*, @skill_*, @skill_*, @skill_*, @skill_*], 3)>
     resume: 70%? <sentence()>
 
 App\Entity\Job:
   job{1..50}:
     title: <jobTitle()>
-    skills: <randomElements([@skill_*, @skill_*, @skill_*, @skill_*, @skill_*])>
+    skills: <randomElements([@skill_*, @skill_*, @skill_*, @skill_*, @skill_*], 3)>

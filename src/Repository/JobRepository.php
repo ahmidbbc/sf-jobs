@@ -28,8 +28,8 @@ class JobRepository extends ServiceEntityRepository
         ;
 
         if(! empty($search["jobTitle"])){
-            $qb ->andWhere("job.title LIKE '%title%'")
-                ->setParameter('title', $search["jobTitle"])
+            $qb ->andWhere("job.title LIKE :title")
+                ->setParameter('title', "%".$search["jobTitle"]."%")
             ;
         }
         if (! empty($search["skills"])){
